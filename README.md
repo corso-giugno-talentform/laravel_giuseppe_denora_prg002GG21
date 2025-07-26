@@ -19,6 +19,7 @@ Benvenuto nel progetto **Wellness Blog**, una piattaforma costruita con Laravel 
 I dati (articoli, popolari, ecc.) vengono passati alle view con:
 ```php
 return view('home', ['articlesRec' => $articlesRecenti, 'popularArticles' => $popolari]);
+``` 
 
 
 ##  UI e Stile
