@@ -12,9 +12,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ route('homepage') }}">Home</a>
                 </li>
-                <li class="nav-item">
+             {{--    <li class="nav-item">
                     <a class="nav-link" href="#articles">Articoli</a>
-                </li>
+                </li> --}}
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('contattaci') }}">Contattici</a>

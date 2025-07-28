@@ -549,3 +549,107 @@
  .cardRecentBtn {
      color: var(--text-color);
  }
+
+ /*FORM */
+   
+        .contact-form {
+            background-color: var(--light-color);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .contact-form .form-control, 
+        .contact-form .form-select {
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .contact-form .form-control:focus, 
+        .contact-form .form-select:focus {
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .privacy-check {
+            margin: 20px 0;
+        }
+        
+        .privacy-check label {
+            margin-left: 10px;
+            color: #666;
+        }
+        
+        .privacy-check a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .privacy-check a:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-info-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 95%;
+        }
+        
+        .contact-info-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .contact-info-card h3 {
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+        
+        .contact-info-card p {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .contact-info-card .social-icons {
+            margin-top: 25px;
+        }
+        
+       
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }

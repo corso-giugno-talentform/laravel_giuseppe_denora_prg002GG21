@@ -1,6 +1,6 @@
 <x-main>
-     <x-slot name="title">
-      Wellness Blog | Articolo
+    <x-slot name="title">
+        Wellness Blog | Articolo
     </x-slot>
 
 
@@ -94,8 +94,11 @@
 
                     <x-sideBar :category="$sidebarCat" />
 
+
+
+
                     <!-- Popular Posts Widget -->
-                    <div >
+                    <div>
                         <x-popular-post-widget :popular="$articlesEvid" />
                     </div>
 
@@ -103,6 +106,8 @@
 
 
                     <x-sidePopularTags :category="$sidebarCat" />
+
+
                     <!-- Newsletter Widget -->
                     <x-newsLetterWid />
                 </div>
@@ -110,8 +115,20 @@
         </div>
     </section>
 
-     <!-- Recent Articles -->
-     <x-recent-articles :articles-rec="$articlesRec" />
+    <!-- Recent Articles -->
+    <x-recent-articles :articles-rec="$articlesRec" />
+
+    <!--  FORM-->
+    <div class="container text-center">
+        <h2 class="section-title">Scrivici un Messaggio riguardo {{ $article['nome'] }} </h2>
+        {{--   <h3 class="section-title">{{ $article['nome'] }}</h3> --}}
+        <div class="row">
+            <div class="col-lg-12 mb-5 mb-lg-0">
+               {{--  cosi prendo anche come parametro l id dell articolo  --}}
+                <x-form type='formArticolo' :article='$article'> </x-form>
+            </div>
+        </div>
+    </div>
 
 
 </x-main>

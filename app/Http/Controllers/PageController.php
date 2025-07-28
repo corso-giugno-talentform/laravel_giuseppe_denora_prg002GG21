@@ -7,34 +7,7 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
 
-    /* protected static  $articlesEvidence = [
-        [
-            'id' => 1,
-            'slug' => '5-tecniche-meditazione',
-            'nome' => '5 Tecniche di Meditazione per Principianti',
-            'descrizione' => 'Scopri come iniziare a meditare con semplici tecniche che puoi praticare ovunque, anche solo per 5 minuti al giorno.o.',
-            'span'=>'Meditazione',
-            
-            'immagine' => 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-        ],
-        [
-            'id' => 2,
-            'slug' => 'superfoods',
-            'nome' => 'Superfoods: Cosa Sono e Perché Dovresti Inserirli nella Tua Dieta',
-            'descrizione' => 'Una guida completa ai superfoods, i loro benefici e come integrarli facilmente nella tua alimentazione quotidiana.',
-            'span'=>'Alimentazione',
-            'immagine' => 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-        ],
-        [
-            'id' => 3,
-            'slug' => 'yoga-stress',
-            'nome' => 'Lo Yoga per Combattere lo Stress: Sequenze per Ogni Livello',
-            'descrizione' => 'Impara sequenze yoga specifiche per ridurre lo stress e ritrovare equilibrio, adatte sia a principianti che a praticanti avanzati.',
-            'span'=>'Yoga',
-            'immagine' => 'https://images.unsplash.com/photo-1534258936925-c58bed479fcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-        ],
-       
-    ]; */
+    
     protected static $articlesEvidence = [
         [
             'id' => 1,
@@ -112,7 +85,7 @@ class PageController extends Controller
             'slug' => 'yoga-stress',
             'letto' => false,
             'nome' => 'Lo Yoga per Combattere lo Stress: Sequenze per Ogni Livello',
-            'descrizione' => 'Sequenze yoga per ridurre lo stress e ritrovare equilibrio, adatte a tutti i livelli.',
+            'descrizione' => 'Sequenze yoga per ridurre lo stress e ritrovare equilibrio, adatte a tutti i livelli. Inizia il tuo percorso oggi',
             'span' => 'Yoga',
             'immagine' => 'https://images.unsplash.com/photo-1534258936925-c58bed479fcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
             'autore' => 'Elena Rossi',
@@ -431,8 +404,66 @@ public function contattaci()
     return view('contattaci');
 }
 
+public function send(Request $request){
+/* ->firstName è il name degli input del form  */
+    $data=[
+        'firstName'=>$request->firstName,
+        'lastName'=>$request->lastName,
+        'email'=>$request->Email,
+        'tel'=>$request->tel,
+        /* modo equival*/ 
+        'selection'=>$request->input('selection'),
+         'textArea' => $request->input('textArea'),
+        'privacy' => $request->input('privacy'),
+      'article' => $request->input('article'),
+
+
+    ];
+    dd($data); 
+}
+
+public function sendFull(Request $request)
+{
+    
+    $allArticles = array_merge(self::$articlesEvidence, self::$articlesRecentFull);
+    // Vedi tutti gli ID disponibili
+/* $ids = array_column($allArticles, 'id');
+dd('ID ricevuto: ' . $request->id, 'ID disponibili:', $ids);
+   
+ */
+ $data = null;
+    foreach ($allArticles as $element){
+        if ((int)$element['id'] === (int)$request->article_id) {
+            $data = [
+                'article_id'=>$request->article_id  , // ID
+                'firstName' => $request->firstName,
+                'lastName' => $request->lastName,
+                'email' => $request->Email,
+                'tel' => $request->tel,
+                'selection' => $request->input('selection'),
+                'textArea' => $request->input('textArea'),
+                'privacy' => $request->input('privacy'),
+                'article_nome' => $request->article_nome ,// titolo dell’articolo
+               
+ 
+
+            ];
+            break; 
+        }
+    }
+
+    if ($data) {
+        dd($data);
+    } else {
+        dd($request->article_nome);
+      
+    }
+}
+
 
 };
+ 
+
 
 
  
