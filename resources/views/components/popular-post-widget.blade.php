@@ -7,7 +7,7 @@
         <div class="popular-post">
             <img src="{{ $art['immagine'] }}" class="popular-img" alt="Post popolare">
             <div>
-                <a href="#" class="popular-title">{{ $art['nome'] }}</a>
+                <a class="cardRecentBtn" href="#" class="popular-title">{{ $art['nome'] }}</a>
                 <p class="popular-date">{{ $art['data_pubblicazione'] }}</p>
             </div>
         </div>

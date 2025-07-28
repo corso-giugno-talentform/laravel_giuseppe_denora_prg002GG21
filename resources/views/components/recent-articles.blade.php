@@ -1,4 +1,6 @@
- @props(['articlesRec'])
+ @props(['articlesRec', 'letto' => false])
+
+
  
  <section id="articles" class="recent-articles">
         <div class="container">
@@ -8,7 +10,8 @@
                 @foreach ($articlesRec as $article)
                  {{--   <x-cardsRecent :article='$article'></x-cardsRecent> --}}
 
-                   <x-card :article='$article'  type="recent"/>
+                  {{--  <x-card :article='$article'  type="recent"/> --}}
+                     <x-card :article="$article" type="recent" :letto="$article['letto']" />
                 @endforeach
 
             </div>

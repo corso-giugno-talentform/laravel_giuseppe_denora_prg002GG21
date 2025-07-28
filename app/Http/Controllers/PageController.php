@@ -38,6 +38,7 @@ class PageController extends Controller
     protected static $articlesEvidence = [
         [
             'id' => 1,
+             'letto' => true,
             'slug' => '5-tecniche-meditazione',
             'nome' => '5 Tecniche di Meditazione per Principianti',
             'descrizione' => 'Scopri come iniziare a meditare con semplici tecniche che puoi praticare ovunque, anche solo per 5 minuti al giorno.',
@@ -75,6 +76,7 @@ class PageController extends Controller
         [
             'id' => 2,
             'slug' => 'superfoods',
+             'letto' => false,
             'nome' => 'Superfoods: Cosa Sono e Perché Dovresti Inserirli nella Tua Dieta',
             'descrizione' => 'Guida ai superfoods, i loro benefici e come integrarli facilmente nella tua alimentazione quotidiana.',
             'span' => 'Alimentazione',
@@ -108,6 +110,7 @@ class PageController extends Controller
         [
             'id' => 3,
             'slug' => 'yoga-stress',
+            'letto' => false,
             'nome' => 'Lo Yoga per Combattere lo Stress: Sequenze per Ogni Livello',
             'descrizione' => 'Sequenze yoga per ridurre lo stress e ritrovare equilibrio, adatte a tutti i livelli.',
             'span' => 'Yoga',
@@ -191,6 +194,7 @@ class PageController extends Controller
         [
             'id' => 4,
             'slug' => '10-cibi-che-aumentano-la-tua-energia',
+            'letto' => false,
             'nome' => '10 Cibi che Aumentano la Tua Energia Naturalmente',
             'span' => 'Alimentazione',
             'immagine' => 'https://images.unsplash.com/photo-1535914254981-b5012eebbd15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -224,6 +228,7 @@ class PageController extends Controller
         [
             'id' => 5,
             'slug' => 'yoga-nitra',
+            'letto' => true,
             'nome' => 'Yoga Nidra: Il Sonno Consapevole per Rigenerarti',
             'span' => 'Yoga',
             'immagine' => 'https://images.unsplash.com/photo-1545389336-cf090694435e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -257,6 +262,7 @@ class PageController extends Controller
         [
             'id' => 6,
             'slug' => 'meditazione-camminata',
+            'letto' => false,
             'nome' => 'Meditazione Camminata: Guida Passo dopo Passo',
             'span' => 'Meditazione',
             'immagine' => 'https://images.unsplash.com/photo-1498758536662-35b82cd15e29?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -289,6 +295,7 @@ class PageController extends Controller
         ],
         [
             'id' => 7,
+            'letto' => true,
             'slug' => 'allenamento-a-casa-20-min',
             'nome' => 'Allenamento a Casa: 20 Minuti per Tutto il Corpo',
             'span' => 'Fitness',
@@ -384,6 +391,16 @@ class PageController extends Controller
             abort(404);
         }
 
+ /* $articoli = self::$articlesRecentFull;
+    $articoloLetto = null;
+
+    foreach ($articoli as &$article) {
+        if ($article['slug'] === $slug) {
+            $article['letto'] = true;
+            $articoloLetto = $article;
+            break;
+        }
+    } */
         return view('article', [
             'article' => $article,
             'sidebarCat' => self::$sidebarCategories,
@@ -406,4 +423,16 @@ class PageController extends Controller
             'articlesRec' => self::$articlesRecentFull,
         ]);
     }
+
+
+
+public function contattaci()
+{
+    return view('contattaci');
+}
+
+
 };
+
+
+ 

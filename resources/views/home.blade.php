@@ -18,7 +18,8 @@
                 @foreach ($articlesEvid as $article)
                    
           {{--   <x-cardEvid :article='$article'></x-cardEvid> --}}
-          <x-card :article='$article'  type="featured"/>
+          {{-- <x-card :article='$article'  type="featured"/> --}}
+            <x-card :article="$article" type="featured" :letto="$article['letto']" />
 
                 @endforeach
             </div>
