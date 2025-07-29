@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendAdminMail;
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 
 class PageController extends Controller
 {
 
-    
+
     protected static $articlesEvidence = [
         [
             'id' => 1,
-             'letto' => true,
+            'letto' => true,
             'slug' => '5-tecniche-meditazione',
             'nome' => '5 Tecniche di Meditazione per Principianti',
             'descrizione' => 'Scopri come iniziare a meditare con semplici tecniche che puoi praticare ovunque, anche solo per 5 minuti al giorno.',
@@ -49,7 +53,7 @@ class PageController extends Controller
         [
             'id' => 2,
             'slug' => 'superfoods',
-             'letto' => false,
+            'letto' => false,
             'nome' => 'Superfoods: Cosa Sono e Perché Dovresti Inserirli nella Tua Dieta',
             'descrizione' => 'Guida ai superfoods, i loro benefici e come integrarli facilmente nella tua alimentazione quotidiana.',
             'span' => 'Alimentazione',
@@ -364,7 +368,7 @@ class PageController extends Controller
             abort(404);
         }
 
- /* $articoli = self::$articlesRecentFull;
+        /* $articoli = self::$articlesRecentFull;
     $articoloLetto = null;
 
     foreach ($articoli as &$article) {
@@ -399,71 +403,72 @@ class PageController extends Controller
 
 
 
-public function contattaci()
-{
-    return view('contattaci');
-}
+    public function contattaci()
+    {
+        return view('contattaci');
+    }
 
-public function send(Request $request){
-/* ->firstName è il name degli input del form  */
-    $data=[
-        'firstName'=>$request->firstName,
-        'lastName'=>$request->lastName,
-        'email'=>$request->Email,
-        'tel'=>$request->tel,
-        /* modo equival*/ 
-        'selection'=>$request->input('selection'),
-         'textArea' => $request->input('textArea'),
-        'privacy' => $request->input('privacy'),
-      'article' => $request->input('article'),
+    public function send(Request $request)
+    {
+        /* ->firstName è il name degli input del form  */
+        $data = [
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName,
+            'email' => $request->Email,
+            'tel' => $request->tel,
+            /* modo equival*/
+            'selection' => $request->input('selection'),
+            'textArea' => $request->input('textArea'),
+            'privacy' => $request->input('privacy'),
+            'article' => $request->input('article'),
 
 
-    ];
-    dd($data); 
-}
+        ];
+        dd($data);
+    }
 
-public function sendFull(Request $request)
-{
-    
-    $allArticles = array_merge(self::$articlesEvidence, self::$articlesRecentFull);
-    // Vedi tutti gli ID disponibili
-/* $ids = array_column($allArticles, 'id');
-dd('ID ricevuto: ' . $request->id, 'ID disponibili:', $ids);
-   
- */
- $data = null;
-    foreach ($allArticles as $element){
-        if ((int)$element['id'] === (int)$request->article_id) {
-            $data = [
-                'article_id'=>$request->article_id  , // ID
-                'firstName' => $request->firstName,
-                'lastName' => $request->lastName,
-                'email' => $request->Email,
-                'tel' => $request->tel,
-                'selection' => $request->input('selection'),
-                'textArea' => $request->input('textArea'),
-                'privacy' => $request->input('privacy'),
-                'article_nome' => $request->article_nome ,// titolo dell’articolo
-               
- 
+    public function sendFull(Request $request)
 
-            ];
-            break; 
+    {
+        $request->validate([
+            'firstName' => ['required', 'max:20'],
+            'lastName' => ['required', 'max:20'],
+            'Email' => ['required', 'Email'],
+            'textArea' => ['required', 'min:10'],
+            'privacy' => ['required']
+
+        ]);
+
+        $allArticles = array_merge(self::$articlesEvidence, self::$articlesRecentFull);
+
+        $data = null;
+        foreach ($allArticles as $element) {
+            if ((int)$element['id'] === (int)$request->article_id) {
+                $data = [
+                    'article_id' => $request->article_id, // ID
+                    'firstName' => $request->firstName,
+                    'lastName' => $request->lastName,
+                    'Email' => $request->Email,
+                    'tel' => $request->tel,
+                    'selection' => $request->input('selection'),
+                    'textArea' => $request->input('textArea'),
+                    'privacy' => $request->input('privacy'),
+                    'article_nome' => $request->article_nome, // titolo dell’articolo
+
+
+
+                ];
+                break;
+            }
+        }
+ //Step3: Invio email con use Illuminate\Support\Facades\Mail;
+        if ($data) {
+           
+            Mail::to($request->Email)->send(new SendMail($data));
+            Mail::to('admin@miosito.it')->send(new SendAdminMail($data));
+            dd('email inviate');
+        } else {
+            dd($request->article_nome);
         }
     }
-
-    if ($data) {
-        dd($data);
-    } else {
-        dd($request->article_nome);
-      
-    }
-}
-
-
 };
- 
-
-
-
- 

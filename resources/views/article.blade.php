@@ -121,7 +121,7 @@
     <!--  FORM-->
     <div class="container text-center">
         <h2 class="section-title">Scrivici un Messaggio riguardo {{ $article['nome'] }} </h2>
-        {{--   <h3 class="section-title">{{ $article['nome'] }}</h3> --}}
+      
         <div class="row">
             <div class="col-lg-12 mb-5 mb-lg-0">
                {{--  cosi prendo anche come parametro l id dell articolo  --}}
